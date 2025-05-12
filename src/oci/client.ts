@@ -1,6 +1,5 @@
 import * as OCI from 'oci-sdk';
-import fs from 'fs';
-import { ociConfig } from '../config';
+import { getOCIConfig, getCompartmentId, getPrivateKey } from './config';
 import logger from '../utils/logger';
 
 /**
@@ -8,15 +7,15 @@ import logger from '../utils/logger';
  */
 const createOCIConfig = (): OCI.common.ConfigFileAuthenticationDetailsProvider => {
   try {
-    const privateKey = fs.readFileSync(ociConfig.keyFile, 'utf8');
-
+    const config = getOCIConfig();
+    
     return new OCI.common.SimpleAuthenticationDetailsProvider(
-      ociConfig.tenancy,
-      ociConfig.user,
-      ociConfig.fingerprint,
-      privateKey,
+      config.tenancy,
+      config.user,
+      config.fingerprint,
+      getPrivateKey(),
       null,
-      ociConfig.region
+      config.region
     );
   } catch (error) {
     logger.error('Error creating OCI configuration', { error });
@@ -78,5 +77,5 @@ export const getDatabaseClient = (): OCI.database.DatabaseClient => {
  * Obtener el ID del compartimento configurado
  */
 export const getCompartmentId = (): string => {
-  return ociConfig.compartmentId;
+  return getCompartmentId();
 };

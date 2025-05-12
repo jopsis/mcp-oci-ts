@@ -1,0 +1,8 @@
+{
+  "userOcid": "ocid1.user.oc1..example",
+  "tenancyOcid": "ocid1.tenancy.oc1..example",
+  "region": "us-ashburn-1",
+  "fingerprint": "12:34:56:78:90:ab:cd:ef:12:34:56:78:90:ab:cd:ef",
+  "keyFile": "/path/to/your/oci_api_key.pem",
+  "compartmentId": "ocid1.compartment.oc1..example"
+}
